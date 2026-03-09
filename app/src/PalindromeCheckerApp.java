@@ -1,36 +1,40 @@
 import java.util.Scanner;
 
+// PalindromeChecker class encapsulates palindrome logic
+class PalindromeChecker {
+    // Method to check palindrome
+    public boolean checkPalindrome(String input) {
+        // Normalize string: remove spaces and convert to lowercase
+        String normalized = input.replaceAll("\\s+", "").toLowerCase();
+
+        int start = 0;
+        int end = normalized.length() - 1;
+
+        // Compare characters from both ends
+        while (start < end) {
+            if (normalized.charAt(start) != normalized.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
+        }
+        return true;
+    }
+}
+
 public class PalindromeCheckerApp {
-
-    // Recursive method to check palindrome
-    public static boolean isPalindrome(String input, int start, int end) {
-        // Base condition: if start crosses end, it's a palindrome
-        if (start >= end) {
-            return true;
-        }
-        return head;
-    }
-
-        // If mismatch found, return false
-        if (input.charAt(start) != input.charAt(end)) {
-            return false;
-        }
-
-        // Recursive call: move inward
-        return isPalindrome(input, start + 1, end - 1);
-    }
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("=== UC9: Recursive Palindrome Checker ===");
+        System.out.println("=== UC11: Object-Oriented Palindrome Service ===");
         System.out.print("Enter a string to check: ");
         String input = scanner.nextLine();
 
-        // Normalize input: remove spaces and convert to lowercase
-        input = input.replaceAll("\\s+", "").toLowerCase();
+        // Create PalindromeChecker object
+        PalindromeChecker checker = new PalindromeChecker();
 
-        if (isPalindrome(input, 0, input.length() - 1)) {
+        // Use encapsulated method
+        if (checker.checkPalindrome(input)) {
             System.out.println("\"" + input + "\" is a Palindrome.");
         } else {
             System.out.println("\"" + input + "\" is NOT a Palindrome.");
