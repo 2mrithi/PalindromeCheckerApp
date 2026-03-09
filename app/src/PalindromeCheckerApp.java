@@ -1,44 +1,83 @@
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.Stack;
 
-// PalindromeChecker class encapsulates palindrome logic
-class PalindromeChecker {
-    // Method to check palindrome
-    public boolean checkPalindrome(String input) {
-        // Normalize string: remove spaces and convert to lowercase
+public class PalindromeCheckerApp {
+
+    // Stack-based palindrome check
+    public static boolean stackPalindrome(String input) {
         String normalized = input.replaceAll("\\s+", "").toLowerCase();
-
-        int start = 0;
-        int end = normalized.length() - 1;
-
-        // Compare characters from both ends
-        while (start < end) {
-            if (normalized.charAt(start) != normalized.charAt(end)) {
+        Stack<Character> stack = new Stack<>();
+        for (char ch : normalized.toCharArray()) {
+            stack.push(ch);
+        }
+        for (char ch : normalized.toCharArray()) {
+            if (ch != stack.pop()) {
                 return false;
             }
-            start++;
-            end--;
+        }
+        return true;
+    }
+
+    // Deque-based palindrome check
+    public static boolean dequePalindrome(String input) {
+        String normalized = input.replaceAll("\\s+", "").toLowerCase();
+        Deque<Character> deque = new LinkedList<>();
+        for (char ch : normalized.toCharArray()) {
+            deque.addLast(ch);
+        }
+        while (deque.size() > 1) {
+            char front = deque.removeFirst();
+            char rear = deque.removeLast();
+            if (front != rear) {
+                return false;
+            }
         }
         return true;
     }
 }
 
-public class PalindromeCheckerApp {
+    // Recursive palindrome check
+    public static boolean recursivePalindrome(String input, int start, int end) {
+        if (start >= end) return true;
+        if (input.charAt(start) != input.charAt(end)) return false;
+        return recursivePalindrome(input, start + 1, end - 1);
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("=== UC11: Object-Oriented Palindrome Service ===");
+        System.out.println("=== UC13: Performance Comparison of Palindrome Algorithms ===");
         System.out.print("Enter a string to check: ");
         String input = scanner.nextLine();
 
-        // Create PalindromeChecker object
-        PalindromeChecker checker = new PalindromeChecker();
+        // Normalize once for recursion
+        String normalized = input.replaceAll("\\s+", "").toLowerCase();
 
-        // Use encapsulated method
-        if (checker.checkPalindrome(input)) {
-            System.out.println("\"" + input + "\" is a Palindrome.");
-        } else {
-            System.out.println("\"" + input + "\" is NOT a Palindrome (ignoring case and spaces).");
-        }
+        // Measure StackStrategy
+        long startTime = System.nanoTime();
+        boolean stackResult = stackPalindrome(input);
+        long stackTime = System.nanoTime() - startTime;
+
+        // Measure DequeStrategy
+        startTime = System.nanoTime();
+        boolean dequeResult = dequePalindrome(input);
+        long dequeTime = System.nanoTime() - startTime;
+
+        // Measure RecursiveStrategy
+        startTime = System.nanoTime();
+        boolean recursiveResult = recursivePalindrome(normalized, 0, normalized.length() - 1);
+        long recursiveTime = System.nanoTime() - startTime;
+
+        // Display results
+        System.out.println("\nResults:");
+        System.out.println("Stack Strategy: " + (stackResult ? "Palindrome" : "Not Palindrome") +
+                " | Time: " + stackTime + " ns");
+        System.out.println("Deque Strategy: " + (dequeResult ? "Palindrome" : "Not Palindrome") +
+                " | Time: " + dequeTime + " ns");
+        System.out.println("Recursive Strategy: " + (recursiveResult ? "Palindrome" : "Not Palindrome") +
+                " | Time: " + recursiveTime + " ns");
 
         scanner.close();
     }
