@@ -36,6 +36,7 @@ public class PalindromeCheckerApp {
         }
         return true;
     }
+}
 
     // Recursive palindrome check
     public static boolean recursivePalindrome(String input, int start, int end) {
