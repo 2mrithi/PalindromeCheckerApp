@@ -38,6 +38,8 @@ class DequeStrategy implements PalindromeStrategy {
         for (char ch : normalized.toCharArray()) {
             deque.addLast(ch);
         }
+        return true;
+    }
 
         while (deque.size() > 1) {
             char front = deque.removeFirst();
