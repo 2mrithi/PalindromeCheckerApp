@@ -1,14 +1,24 @@
-/*
- * Application entry point
- * This is the first method execute by the JVM when the program starts
- * @author Developer
- * @Version 1.0
- */
+import java.util.Scanner;
 
 public class PalindromeCheckerApp {
+
     public static void main(String[] args) {
-        System.out.print("Welcome to The Palindrome Checker Management System");
-        System.out.print("Version : 1.0");
-        System.out.print("System Initialized Successfully");
+
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+
+        String reversed = "";
+
+        for (int i = input.length() - 1; i >= 0; i--) {
+            reversed = reversed + input.charAt(i);
+        }
+
+        if (input.equals(reversed)) {
+            System.out.println("Palindrome");
+        } else {
+            System.out.println("Not a Palindrome");
+        }
+
+        sc.close();
     }
 }
