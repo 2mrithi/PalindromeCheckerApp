@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
-public class PalindromeCheckerApp {
-
-    // Method to check palindrome ignoring case and spaces
-    public static boolean isPalindrome(String input) {
+// PalindromeChecker class encapsulates palindrome logic
+class PalindromeChecker {
+    // Method to check palindrome
+    public boolean checkPalindrome(String input) {
         // Normalize string: remove spaces and convert to lowercase
         String normalized = input.replaceAll("\\s+", "").toLowerCase();
 
@@ -18,19 +18,24 @@ public class PalindromeCheckerApp {
             start++;
             end--;
         }
-
         return true;
     }
+}
 
+public class PalindromeCheckerApp {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("=== UC10: Case-Insensitive & Space-Ignored Palindrome Checker ===");
+        System.out.println("=== UC11: Object-Oriented Palindrome Service ===");
         System.out.print("Enter a string to check: ");
         String input = scanner.nextLine();
 
-        if (isPalindrome(input)) {
-            System.out.println("\"" + input + "\" is a Palindrome (ignoring case and spaces).");
+        // Create PalindromeChecker object
+        PalindromeChecker checker = new PalindromeChecker();
+
+        // Use encapsulated method
+        if (checker.checkPalindrome(input)) {
+            System.out.println("\"" + input + "\" is a Palindrome.");
         } else {
             System.out.println("\"" + input + "\" is NOT a Palindrome (ignoring case and spaces).");
         }
