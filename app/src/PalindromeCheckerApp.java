@@ -37,7 +37,7 @@ public class PalindromeCheckerApp {
         if (checker.checkPalindrome(input)) {
             System.out.println("\"" + input + "\" is a Palindrome.");
         } else {
-            System.out.println("\"" + input + "\" is NOT a Palindrome.");
+            System.out.println("\"" + input + "\" is NOT a Palindrome (ignoring case and spaces).");
         }
 
         scanner.close();
