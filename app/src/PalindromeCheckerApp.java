@@ -8,6 +8,8 @@ public class PalindromeCheckerApp {
         if (start >= end) {
             return true;
         }
+        return head;
+    }
 
         // If mismatch found, return false
         if (input.charAt(start) != input.charAt(end)) {
