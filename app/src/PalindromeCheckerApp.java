@@ -1,28 +1,24 @@
-* Application entry point
-import java.util.Stack;
+import java.util.Scanner;
 
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        String input = "noon";
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
 
-        Stack<Character> stack = new Stack<>();
+        String reversed = "";
 
-        for (char c : input.toCharArray()) {
-            stack.push(c);
+        for (int i = input.length() - 1; i >= 0; i--) {
+            reversed = reversed + input.charAt(i);
         }
 
-        boolean isPalindrome = true;
-
-        for (char c : input.toCharArray()) {
-            if (c != stack.pop()) {
-                isPalindrome = false;
-                break;
-            }
+        if (input.equals(reversed)) {
+            System.out.println("Palindrome");
+        } else {
+            System.out.println("Not a Palindrome");
         }
 
-        System.out.println("Input : " + input);
-        System.out.println("Is Palindrome? : " + isPalindrome);
+        sc.close();
     }
 }
