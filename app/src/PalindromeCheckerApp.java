@@ -7,8 +7,26 @@
 
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
-        System.out.print("Welcome to The Palindrome Checker Management System");
-        System.out.print("Version : 1.0");
-        System.out.print("System Initialized Successfully");
+        public static void main(String[] args) {
+
+            String input = "madam";   // Hardcoded string
+            boolean isPalindrome = true;
+
+            // Loop only till half of the string length
+            for (int i = 0; i < input.length() / 2; i++) {
+
+                // Compare characters from both ends
+                if (input.charAt(i) != input.charAt(input.length() - 1 - i)) {
+                    isPalindrome = false;
+                    break;
+                }
+            }
+
+            // Print input text
+            System.out.println("Input text: " + input);
+
+            // Print result
+            System.out.println("Is it a Palindrome?: " + isPalindrome);
+        }
     }
 }
